@@ -6,8 +6,12 @@ Run these commands(once):
     cp -R ~/.ssh .ssh
     cp  -R ~/.aws .aws
     rm .ssh/known_hosts
+___
+Then copy .env.copy to .env or run the following command:
 
-Then fill .env file with your email and name
+    cp .env.copy .env
+___
+Fill .env file with your email and name
 
 Add the next line to .ssh/config file after 'Host *' in line 2:
 

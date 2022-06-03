@@ -37,7 +37,7 @@ git checkout $versionname
 git config --global user.email "${GIT_GLOBAL_USER_EMAIL}"
 git config --global user.name "${GIT_GLOBAL_USER_NAME}"
 
-sed -i "s/BLACKLISTED=('')/BLACKLISTED=('kohls-sampling')/" goldrush/deployToFleet.sh
+sed -i "s/BLACKLISTED=('')/BLACKLISTED=('kohls-sampling')/" deployToFleet.sh
 
 ./deployToFleet.sh -r us-east-1 -p prod -g | tee ../release_${versionname}_us_default.log
 
@@ -52,3 +52,4 @@ echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "Profile prod | region us-east-1 has been successfully deployed"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+
