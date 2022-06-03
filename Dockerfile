@@ -25,7 +25,6 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py
 RUN python3 get-pip.py --user
 
 RUN echo "complete -C aws_completer aws" >> ~/.bashrc
-RUN echo "export LDAP="${LDAP} >> ~/.bashrc
 RUN echo 'export PATH=~/.local/bin:$PATH' >> ~/.bashrc
 
 COPY .bashrc /root/.bashrc_temp

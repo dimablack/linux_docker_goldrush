@@ -7,7 +7,6 @@ if [ -f .env ]; then
 fi
 
 #cat .env
-echo "LDAP=${LDAP}"
 echo "GIT_GLOBAL_USER_EMAIL=${GIT_GLOBAL_USER_EMAIL}"
 echo "GIT_GLOBAL_USER_NAME=${GIT_GLOBAL_USER_NAME}"
 
@@ -22,8 +21,14 @@ if [ -z "$1" ]
     read versionname
 fi
 
-echo ${versionname}
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Removing goldrush folder..."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 rm -rf goldrush
+
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Clone new goldrush repository..."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 git clone git@github.com:bazaarvoice/goldrush.git
 
 cd goldrush
@@ -52,3 +57,4 @@ echo "Returned to develop branch"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "Kohls has been successfully deployed"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"

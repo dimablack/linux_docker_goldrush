@@ -1,4 +1,7 @@
-Run these commands:
+___
+## PREPARE
+___
+Run these commands(once):
 
     cp -R ~/.ssh .ssh
     cp  -R ~/.aws .aws
@@ -6,11 +9,16 @@ Run these commands:
 
 Then fill .env file with your email and name
 
-Run:
+Run(once), if you changed Dockerfile, run this command again:
     
-    docker-compose build
-    docker-compose up -d
-    docker exec -it linux_docker_goldrush bash
+    docker-compose build --no-cache
+___
+___
+## USAGE
+___
+**Everytime when you want to deploy:**
+
+    docker-compose up -d && docker exec -it linux_docker_goldrush bash
 
 ___
 Auto deploy commands:
@@ -23,7 +31,15 @@ Auto deploy commands:
     sh deploy_prod_eu_west_1.sh 3.149.0
 
     sh deploy_prod_us_east_1.sh 3.149.0
+
 ___
+___
+___
+## ADDITIONAL
+___
+Remove repository and git clone the last one
+
+    sh clean_new_repository.sh
 ___
 MANUAL deploy commands:
 
@@ -40,11 +56,5 @@ Clean repository after deploy
     git checkout -- .
     git clean -f
 ___
-Finish
+Thanks)))
 ___
-___
-___
-
-rebuild container without cache
-    
-    docker-compose build --no-cache

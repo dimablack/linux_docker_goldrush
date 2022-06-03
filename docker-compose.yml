@@ -12,5 +12,6 @@ services:
       - ./commands/deploy_default_us_east_1.sh:/app/deploy_default_us_east_1.sh
       - ./commands/deploy_prod_eu_west_1.sh:/app/deploy_prod_eu_west_1.sh
       - ./commands/deploy_prod_us_east_1.sh:/app/deploy_prod_us_east_1.sh
+      - ./commands/clean_new_repository.sh:/app/clean_new_repository.sh
       - ./.env:/app/.env
     command: tail -f /dev/null

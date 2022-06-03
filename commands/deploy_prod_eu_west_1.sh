@@ -6,7 +6,6 @@ if [ -f .env ]; then
     export $(cat .env | grep -v '#' | sed 's/\r$//' | awk '/=/ {print $1}' )
 fi
 
-echo "LDAP=${LDAP}"
 echo "GIT_GLOBAL_USER_EMAIL=${GIT_GLOBAL_USER_EMAIL}"
 echo "GIT_GLOBAL_USER_NAME=${GIT_GLOBAL_USER_NAME}"
 
@@ -21,7 +20,14 @@ if [ -z "$1" ]
     read versionname
 fi
 
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Removing goldrush folder..."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 rm -rf goldrush
+
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+echo "Clone new goldrush repository..."
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 git clone git@github.com:bazaarvoice/goldrush.git
 
 cd goldrush
@@ -43,3 +49,4 @@ echo "Returned to develop branch"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "Profile prod | region eu-west-1 has been successfully deployed"
+echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
