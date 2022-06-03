@@ -9,6 +9,10 @@ Run these commands(once):
 
 Then fill .env file with your email and name
 
+Add the next line to .ssh/config file after 'Host *' in line 2:
+
+    IgnoreUnknown AddKeysToAgent,UseKeychain
+
 Run(once), if you changed Dockerfile, run this command again:
     
     docker-compose build --no-cache
