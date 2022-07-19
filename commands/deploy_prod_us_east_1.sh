@@ -16,7 +16,7 @@ if [ -z "$1" ]
     echo
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     echo
-    echo "Enter release version |git checkout ...|:?"
+    echo "Enter release version | git checkout ...|:?"
     read versionname
 fi
 
