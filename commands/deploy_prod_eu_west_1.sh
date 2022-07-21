@@ -52,7 +52,7 @@ git checkout "${versionname}"
 git config --global user.email "${GIT_GLOBAL_USER_EMAIL}"
 git config --global user.name "${GIT_GLOBAL_USER_NAME}"
 
-./deployToFleet.sh -r eu-west-1 -p prod -g | tee ../release_"${versionname}"_us_default.log
+#./deployToFleet.sh -r eu-west-1 -p prod -g | tee ../release_"${versionname}"_us_default.log
 
 git restore --staged .
 git checkout -- .
