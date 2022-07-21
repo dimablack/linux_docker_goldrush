@@ -18,6 +18,7 @@ echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 #  startPrintWarning
 #  echo 'There was some error when execute: "git clone git@github.com:bazaarvoice/goldrush.git"'
 #  endPrintWarning
+#  exit
 #fi
 
 cd goldrush
@@ -26,6 +27,7 @@ then
   startPrintWarning
   echo 'There was some error when execute: "cd goldrush"'
   endPrintWarning
+  exit
 fi
 
 function checkVersion() {
