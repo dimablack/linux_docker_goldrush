@@ -18,7 +18,11 @@ start: ##Start local container and exit to it
 	docker-compose up -d && docker exec -it linux_docker_goldrush bash
 
 rebuild-start: ##Rebuild and start local container and exit to it
-	docker-compose up -d --build && docker exec -it linux_docker_goldrush bash
+	make build
+	make start
 
 build: ##Rebuil local container without cache
 	docker-compose build --no-cache
+
+down: ##Down local container
+	docker-compose down

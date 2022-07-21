@@ -31,14 +31,14 @@ ___
 ___
 Auto deploy commands:
 
-    sh deploy_kohls.sh 3.149.0
+    bash deploy_kohls.sh 3.149.0
 
 
-    sh deploy_default_us_east_1.sh 3.149.0
+    bash deploy_default_us_east_1.sh 3.149.0
 
-    sh deploy_prod_eu_west_1.sh 3.149.0
+    bash deploy_prod_eu_west_1.sh 3.149.0
 
-    sh deploy_prod_us_east_1.sh 3.149.0
+    bash deploy_prod_us_east_1.sh 3.149.0
 
 ___
 ___
@@ -47,7 +47,7 @@ ___
 ___
 Remove repository and git clone the last one
 
-    sh clean_new_repository.sh
+    bash clean_new_repository.sh
 ___
 MANUAL deploy commands:
 

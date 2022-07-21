@@ -10,7 +10,7 @@ echo "Clone new goldrush repository..."
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 git clone git@github.com:bazaarvoice/goldrush.git
 
-cd goldrush
+cd goldrush || exit
 
 git config --global user.email "${GIT_GLOBAL_USER_EMAIL}"
 git config --global user.name "${GIT_GLOBAL_USER_NAME}"

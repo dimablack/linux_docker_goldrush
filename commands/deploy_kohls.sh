@@ -1,14 +1,6 @@
 #!/bin/bash
 
-# Local .env
-if [ -f .env ]; then
-    # Load Environment Variables
-    export $(cat .env | grep -v '#' | sed 's/\r$//' | awk '/=/ {print $1}' )
-fi
-
-#cat .env
-echo "GIT_GLOBAL_USER_EMAIL=${GIT_GLOBAL_USER_EMAIL}"
-echo "GIT_GLOBAL_USER_NAME=${GIT_GLOBAL_USER_NAME}"
+source check_env_file.sh
 
 versionname="${1}"
 
@@ -18,7 +10,7 @@ if [ -z "$1" ]
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     echo
     echo "Enter release version | git checkout ...|:?"
-    read versionname
+    read -r versionname
 fi
 
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
@@ -33,7 +25,29 @@ git clone git@github.com:bazaarvoice/goldrush.git
 
 cd goldrush
 
-git checkout $versionname
+function checkVersion() {
+git checkout "${versionname}"
+status=$?
+echo $status
+if [ $status -ne 0 ]
+  then
+    echo
+    echo 'Wrong version name, try again:'
+    if [ -z "$1" ]
+    then
+      echo
+      echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      echo
+      echo "Enter release version | git checkout ...|:?"
+      read -r versionname
+      checkVersion
+    fi
+fi
+}
+
+checkVersion
+
+git checkout "${versionname}"
 
 sed -i "s/goldrush_prod_web:1.3.0/goldrush_cookie_kohls:latest/" Dockerrun.aws.json
 
@@ -43,7 +57,7 @@ git config --global user.name "${GIT_GLOBAL_USER_NAME}"
 git add Dockerrun.aws.json
 git commit -m "kohls ${versionname}"
 
-./deployToFleet.sh -i kohls-sampling -r us-east-1 -p prod -g | tee ../../release_kohls_${versionname}.log
+#./deployToFleet.sh -i kohls-sampling -r us-east-1 -p prod -g | tee ../../release_kohls_"${versionname}".log
 
 git restore --staged .
 git checkout -- .
@@ -52,9 +66,13 @@ git clean -f
 git reset --hard HEAD~1
 
 git checkout develop
+cd ..
 
+echo
 echo "Returned to develop branch"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "Kohls has been successfully deployed"
+echo
+echo "Release $versionname to Kohls has been successfully deployed"
+echo
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"

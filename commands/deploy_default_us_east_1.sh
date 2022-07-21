@@ -1,24 +1,8 @@
 #!/bin/bash
 
-# Local .env
-if [ -f .env ]; then
-    # Load Environment Variables
-    export $(cat .env | grep -v '#' | sed 's/\r$//' | awk '/=/ {print $1}' )
-fi
-
-echo "GIT_GLOBAL_USER_EMAIL=${GIT_GLOBAL_USER_EMAIL}"
-echo "GIT_GLOBAL_USER_NAME=${GIT_GLOBAL_USER_NAME}"
+source check_env_file.sh
 
 versionname="${1}"
-
-if [ -z "$1" ]
-  then
-    echo
-    echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    echo
-    echo "Enter release version | git checkout ...|:?"
-    read versionname
-fi
 
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "Removing goldrush folder..."
@@ -32,21 +16,45 @@ git clone git@github.com:bazaarvoice/goldrush.git
 
 cd goldrush
 
-git checkout $versionname
+function checkVersion() {
+git checkout "${versionname}"
+status=$?
+echo $status
+if [ $status -ne 0 ]
+  then
+    echo
+    echo 'Wrong version name, try again:'
+    if [ -z "$1" ]
+    then
+      echo
+      echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      echo
+      echo "Enter release version | git checkout ...|:?"
+      read -r versionname
+      checkVersion
+    fi
+fi
+}
+
+checkVersion
 
 git config --global user.email "${GIT_GLOBAL_USER_EMAIL}"
 git config --global user.name "${GIT_GLOBAL_USER_NAME}"
 
-./deployToFleet.sh -r us-east-1 -p default -g | tee ../release_${versionname}_us_default.log
+#./deployToFleet.sh -r us-east-1 -p default -g | tee ../release_${versionname}_us_default.log
 
 git restore --staged .
 git checkout -- .
 git clean -f
 
 git checkout develop
+cd ..
 
+echo
 echo "Returned to develop branch"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-echo "Profile default | region us-east-1 has been successfully deployed"
+echo
+echo "Release $versionname to Profile default | region us-east-1 has been successfully deployed"
+echo
 echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
