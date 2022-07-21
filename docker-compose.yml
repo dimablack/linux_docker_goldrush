@@ -4,6 +4,7 @@ services:
   linux:
     build:
       context: .
+    platform: linux/x86_64
     container_name: linux_docker_goldrush
 #    ports:
 #      - "8004:80"
