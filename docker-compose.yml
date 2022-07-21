@@ -17,5 +17,6 @@ services:
       - ./commands/deploy_to_whole_fleet.sh:/app/deploy_to_whole_fleet.sh
       - ./commands/check_env_file.sh:/app/check_env_file.sh
       - ./commands/git_process.sh:/app/git_process.sh
+      - ./commands/git_process_end.sh:/app/git_process_end.sh
       - ./.env:/app/.env
     command: tail -f /dev/null

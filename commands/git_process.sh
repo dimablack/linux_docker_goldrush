@@ -52,3 +52,25 @@ checkVersion
 
 git config --global user.email "${GIT_GLOBAL_USER_EMAIL}"
 git config --global user.name "${GIT_GLOBAL_USER_NAME}"
+
+function gitEnd() {
+  echo 'RUN: git restore --staged .'
+  git restore --staged .
+  echo 'RUN: git checkout -- .'
+  git checkout -- .
+  echo 'RUN: git clean -f'
+  git clean -f
+
+  echo 'RUN: git reset --hard HEAD~1'
+  git reset --hard HEAD~1
+
+  echo 'RUN: git checkout develop'
+  git checkout develop
+  echo 'RUN: cd ..'
+  cd ..
+
+  echo
+  echo "Returned to develop branch"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  echo
+}
