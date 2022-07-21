@@ -4,7 +4,7 @@ source check_env_file.sh
 
 source git_process.sh "${1}"
 
-#./deployToFleet.sh -r eu-west-1 -p prod -g | tee ../release_"${versionname}"_us_default.log
+./deployToFleet.sh -r eu-west-1 -p prod -g | tee ../release_"${versionname}"_us_default.log
 
 gitEnd
 

@@ -6,7 +6,7 @@ source git_process.sh "${1}"
 
 sed -i "s/BLACKLISTED=('')/BLACKLISTED=('kohls-sampling')/" deployToFleet.sh
 
-#./deployToFleet.sh -r us-east-1 -p prod -g | tee ../release_"${versionname}"_us_default.log
+./deployToFleet.sh -r us-east-1 -p prod -g | tee ../release_"${versionname}"_us_default.log
 
 gitEnd
 
